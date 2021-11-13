@@ -9,10 +9,12 @@ public class Kitchen {
  * @return
  */
 	public boolean markDone(ArrayBag order) {
+	if (order.isEmpty())
+		return true;
 		
 		
-		
-		
-		return false;	
+	else {
+		return false;
 	}
+   }
 }

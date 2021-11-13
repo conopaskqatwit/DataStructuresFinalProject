@@ -47,5 +47,8 @@ public class MenuItems {
 	public boolean equals() {
 		return false;
 	}
+	public double getPrice(){
+		return this.price;
+	}
 	
 }

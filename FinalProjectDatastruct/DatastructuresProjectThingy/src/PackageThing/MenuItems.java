@@ -1,7 +1,7 @@
 package PackageThing;
 
 public class MenuItems {
-	public double price;
+	private double price;
 	private String name;
 	private String description;
 	private int type;

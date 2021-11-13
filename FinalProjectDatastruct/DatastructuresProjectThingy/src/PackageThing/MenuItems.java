@@ -1,0 +1,42 @@
+package PackageThing;
+
+public class MenuItems extends Manager{
+	private double price;
+	private String name;
+	private String description;
+	private int type;
+	public MenuItems() {
+		
+	}
+	public MenuItems(double price, String name, String description, int type) {
+		
+	}
+/**
+ * change price of an item
+ * @param newPrice
+ */
+	public void changePrice(double newPrice) {
+
+	}
+/**
+ * change Description
+ * @param newDescription
+ */
+	public void changeDescription(String newDescription) {
+
+	}
+/**
+ * changes type
+ * @param newType
+ */
+	public void changeType(int newType) {
+
+	}
+/**
+ * changes name
+ * @param newName
+ */
+	public void changeName(String newName) {
+
+	}
+}

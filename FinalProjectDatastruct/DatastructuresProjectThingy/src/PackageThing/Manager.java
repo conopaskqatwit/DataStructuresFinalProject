@@ -2,19 +2,19 @@ package PackageThing;
 
 import java.util.Scanner;
 
-public class Manager {
-	private int DEFAULT_PIN = 0000;
-	public int pin;
+public final class Manager {
+	private static int DEFAULT_PIN = 0000;
+	public static int pin;
 
 	/**
 	 * changes manager Pin
 	 */
-	public void changePin(Scanner input) {
+	public static void changePin(Scanner input) {
 		System.out.println("Enter Pin:");
 		int oldPin = input.nextInt();
-		if(oldPin == this.pin) {
+		if(oldPin == pin) {
 			System.out.println("Enter new Pin:");
-			this.pin = input.nextInt();
+			pin = input.nextInt();
 		} else {
 			System.out.println("Pin is incorrect");
 			return;
@@ -24,7 +24,7 @@ public class Manager {
 	 * adds item to menu
 	 * @param newitem
 	 */
-	 public void addItem(Scanner input, Menu m) {
+	 public static void addItem(Scanner input) {
 		 System.out.println("Name of Item: ");
 		 String name = input.nextLine();
 		 
@@ -38,9 +38,9 @@ public class Manager {
 		 int type = input.nextInt();
 		 
 		 if(type == 1) {
-			 m.drinks.add(new MenuItems(price, name, description, type));
+			 Menu.drinks.add(new MenuItems(price, name, description, type));
 		 } else if(type == 2) {
-			 m.food.add(new MenuItems(price, name, description, type));
+			 Menu.food.add(new MenuItems(price, name, description, type));
 		 }
 		 
 		 return;
@@ -52,12 +52,12 @@ public class Manager {
 	 * removes item from menu
 	 * @param olditem
 	 */
-	public void removeItem(MenuItems oldItem, Menu m) {
+	public static void removeItem(MenuItems oldItem ) {
 		
 		if(oldItem.getType() == 1) {
-			m.drinks.remove(m.drinks.getIndex(oldItem));
+			Menu.drinks.remove(Menu.drinks.getIndex(oldItem));
 		} else if(oldItem.getType() == 2) {
-			m.food.remove(m.food.getIndex(oldItem));
+			Menu.food.remove(Menu.food.getIndex(oldItem));
 		}
 		
 		return;

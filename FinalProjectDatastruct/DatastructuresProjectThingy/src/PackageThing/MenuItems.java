@@ -1,6 +1,6 @@
 package PackageThing;
 
-public class MenuItems extends Manager{
+public class MenuItems {
 	private double price;
 	private String name;
 	private String description;
@@ -39,4 +39,13 @@ public class MenuItems extends Manager{
 	public void changeName(String newName) {
 
 	}
+	
+	public int getType() {
+		return this.type;
+	}
+	
+	public boolean equals() {
+		return false;
+	}
+	
 }

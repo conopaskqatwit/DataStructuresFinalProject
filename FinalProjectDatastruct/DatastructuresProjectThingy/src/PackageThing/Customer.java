@@ -2,13 +2,13 @@ package PackageThing;
 
 import java.sql.Array;
 
-public class Customer {
-	private double totalPrice;
-	private String Name;
-	private ArrayBag<MenuItems> Cart;
+public final class Customer {
+	private static double totalPrice;
+	private static String Name;
+	private static ArrayBag<MenuItems> cart;
 
-	public Customer(String name) {
-		this.Name = name;
+	private Customer(String name) {
+		Name = name;
 	}
 
 	/**
@@ -17,8 +17,8 @@ public class Customer {
 	 * @param item
 	 * @return
 	 */
-	public boolean selectItem(MenuItems item) {
-		Cart.add(item);
+	public static boolean selectItem(MenuItems item) {
+		cart.add(item);
 		return true;
 	}
 
@@ -29,19 +29,20 @@ public class Customer {
 	 * 
 	 * @return boolean
 	 */
-	public boolean checkOut(Kitchen k) {
-		MenuItems[] cartArray = (MenuItems[]) new Array[Cart.getCurrentSize()];
-		cartArray = Cart.toArray();
+	public static boolean checkOut() {
+		MenuItems[] cartArray = (MenuItems[]) new Array[cart.getCurrentSize()];
+		cartArray = cart.toArray();
 		int cartsize = cartArray.length;
 		double totalprice = 0;
 		for (int i = 0; i < cartsize; i++) {
-			totalprice = totalprice + cartArray[i].price;
+			totalprice = totalprice + cartArray[i].getPrice();
 		}
 		System.out.println("Your subtotal is: " + totalprice);
 		System.out.printf("MA tax is: %.2f%n", totalprice * 0.625);
 		System.out.printf("Your total is: %.2f%n", (totalprice * 0.625 + totalprice));
-		this.totalPrice = totalprice * 0.625 + totalprice;
-		k.orders.enqueue(Cart);
+		totalPrice = totalprice * 0.625 + totalprice;
+		//not done need to copy to new bag to send to queue
+		Kitchen.orders.enqueue(cart);
 		return true;
 	}
 
@@ -51,8 +52,8 @@ public class Customer {
 	 * @param item
 	 * @return
 	 */
-	public MenuItems removeItem(MenuItems item) {
-		Cart.remove(item);
+	public static MenuItems removeItem(MenuItems item) {
+		cart.remove(item);
 		return item;
 	}
 
@@ -61,8 +62,10 @@ public class Customer {
 	 * 
 	 * @param name
 	 */
-	public void setName(String name) {
-		this.Name = name;
+	public static void setName(String name) {
+		Name = name;
 	}
-
+public static ArrayBag<MenuItems> getCart(){
+	return cart;
+}
 }

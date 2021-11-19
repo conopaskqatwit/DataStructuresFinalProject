@@ -1,11 +1,18 @@
 package PackageThing;
 
 import java.sql.Array;
-
+/**
+ * Customer Class
+ * @author conopaskq
+ *
+ */
 public final class Customer {
+	/**
+	 * Data Fields for Customer
+	 */
 	private static double totalPrice;
 	private static String Name;
-	private static ArrayBag<MenuItems> cart;
+	private static ArrayBag<MenuItems> cart = new ArrayBag<MenuItems>();
 
 	private Customer(String name) {
 		Name = name;
@@ -30,20 +37,25 @@ public final class Customer {
 	 * @return boolean
 	 */
 	public static boolean checkOut() {
+		if(!cart.isEmpty()) {
 		MenuItems[] cartArray = (MenuItems[]) new Array[cart.getCurrentSize()];
+		ArrayBag<MenuItems> finalCart = new ArrayBag<MenuItems>() ;
 		cartArray = cart.toArray();
 		int cartsize = cartArray.length;
-		double totalprice = 0;
+		totalPrice = 0;
 		for (int i = 0; i < cartsize; i++) {
-			totalprice = totalprice + cartArray[i].getPrice();
+			totalPrice = totalPrice + cartArray[i].getPrice();
+			finalCart.add(cartArray[i]);
 		}
-		System.out.println("Your subtotal is: " + totalprice);
-		System.out.printf("MA tax is: %.2f%n", totalprice * 0.625);
-		System.out.printf("Your total is: %.2f%n", (totalprice * 0.625 + totalprice));
-		totalPrice = totalprice * 0.625 + totalprice;
-		//not done need to copy to new bag to send to queue
-		Kitchen.orders.enqueue(cart);
+		System.out.println("Your subtotal is: " + totalPrice);
+		System.out.printf("MA tax is: %.2f%n", totalPrice * 0.625);
+		System.out.printf("Your total is: %.2f%n", (totalPrice * 0.625 + totalPrice));
+		totalPrice = totalPrice * 0.625 + totalPrice;
+		Kitchen.orders.enqueue(finalCart);
 		return true;
+	}
+		else
+			return false;
 	}
 
 	/**
@@ -68,4 +80,13 @@ public final class Customer {
 public static ArrayBag<MenuItems> getCart(){
 	return cart;
 }
+//Display Bag of menuitems
+	public static String displayCart() {
+		String result = "Bag[ ";
+        for (int index = 0; index < cart.getCurrentSize(); index++) {
+            result += MenuItem.displayItem() + " ";
+        } // end for
+        result += "]";
+        return result;
+	}
 }

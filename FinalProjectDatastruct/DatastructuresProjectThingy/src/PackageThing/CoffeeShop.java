@@ -24,11 +24,13 @@ public class CoffeeShop {
 			System.out.println("hello " + name);
 			Customer.setName(name);
 			displayMenu(input);
-			customerOption(input);
+			
 
 			// customer side
 		} else if (login == 2) {
-			// Kitchen
+			// Kitchen 
+			// Is going to display the queue of finalcarts
+			//ask kitchen if an order is done and what order it is then removes from the queue and displays the queue again
 		} else if (login == 3) {
 			System.out.println("Please enter the pin: ");
 			int enteredPin = getInt(input);
@@ -36,6 +38,7 @@ public class CoffeeShop {
 				System.out.println("Pin is incorrect");
 				login(input);
 			} else {
+				System.out.println("Hello Manager, What would you like todo?");
 				
 			}
 			// ask for pin
@@ -86,6 +89,7 @@ public class CoffeeShop {
 			}
 		} else if (choice == 3) {
 			displayMenu(input);
+			
 		} else {
 			System.out.println("Not a valid input, please try again: ");
 			customerOption(input);
@@ -106,8 +110,10 @@ public class CoffeeShop {
 		int menuchoice = getInt(input);
 		if (menuchoice == 1) {
 			Menu.displayDrinks();
+			customerOption(input);
 		} else if (menuchoice == 2) {
 			Menu.displayFood();
+			customerOption(input);
 		} else {
 			System.out.println("not a valid selction please try again");
 			displayMenu(input);
@@ -124,11 +130,12 @@ public class CoffeeShop {
 			// going to grab menu item but number, users number will be decrimednt by 1 to
 			// account for index, copy into cart
 		} else if (choice == 2) {
-			if (Customer.getCart().isEmpty()) {
+			boolean checkout = Customer.checkOut();
+			if (!checkout) {
 				System.out.println("Cannot checkout empty cart, please make another selection");
 				customerOption(input);
 			} else {
-				Customer.checkOut();
+				//Customer.checkOut();
 				login(input);
 			}
 		} else if (choice == 3) {

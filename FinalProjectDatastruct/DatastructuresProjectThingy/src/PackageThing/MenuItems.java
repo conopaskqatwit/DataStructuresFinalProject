@@ -16,28 +16,28 @@ public class MenuItems {
  * @param newPrice
  */
 	public void changePrice(double newPrice) {
-
+	this.price = newPrice;
 	}
 /**
  * change Description
  * @param newDescription
  */
 	public void changeDescription(String newDescription) {
-
+	this.description = newDescription;
 	}
 /**
  * changes type
  * @param newType
  */
 	public void changeType(int newType) {
-
+	this.type = newType;
 	}
 /**
  * changes name
  * @param newName
  */
 	public void changeName(String newName) {
-
+		this.name = newName;
 	}
 	
 	public int getType() {
@@ -49,6 +49,15 @@ public class MenuItems {
 	}
 	public double getPrice(){
 		return this.price;
+	}
+	// to string method
+	/**
+	 * display all the items in the menu
+	 * @return
+	 */
+	public String displayMenuItems() {
+		String items = "Price: " + price +"Name of item: " + name +"Description: " + "Type: " + type;
+		return items;
 	}
 	
 }

@@ -81,6 +81,18 @@ public class ArrayList<T> implements ListInterface<T> {
 			throw new IndexOutOfBoundsException("Illegal position given to remove operation.");
 		}
 	} // end remove
+	
+	/*
+	 * Returns index of given entry, returns -1 if not found
+	 */
+	public int getIndex(T entry) {
+		for (int index = 0; index < numberOfEntries; index++) {
+			if(entry.equals(list[index])) {
+				return index;
+			}
+		}
+		return -1;
+	}
 
 	/*
 	 * Shifts entries that are beyond the entry to be removed to the next lower

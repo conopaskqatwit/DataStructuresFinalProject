@@ -8,16 +8,19 @@ public final class Manager {
 
 	/**
 	 * changes manager Pin
+	 * @param Scanner to read new pin
+	 * @return true if successful, false otherwise
 	 */
-	public static void changePin(Scanner input) {
+	public static boolean changePin(Scanner input) {
 		System.out.println("Enter Pin:");
 		int oldPin = input.nextInt();
 		if(oldPin == pin) {
 			System.out.println("Enter new Pin:");
-			pin = input.nextInt();
+			pin = CoffeeShop.getInt(input);
+			return true;
 		} else {
 			System.out.println("Pin is incorrect");
-			return;
+			return false;
 		}
 	}
 	/**
@@ -50,7 +53,7 @@ public final class Manager {
 	
 	 /**
 	 * removes item from menu
-	 * @param olditem
+	 * @param item to remove from menu
 	 */
 	public static void removeItem(MenuItems oldItem ) {
 		

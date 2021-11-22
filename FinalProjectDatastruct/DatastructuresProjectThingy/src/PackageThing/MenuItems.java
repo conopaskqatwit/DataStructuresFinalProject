@@ -1,15 +1,20 @@
 package PackageThing;
 
+import java.util.Comparator;
+
 public class MenuItems {
-	private double price;
-	private String name;
+	public double price;
+	public String name;
 	private String description;
 	private int type;
 	public MenuItems() {
 		
 	}
 	public MenuItems(double price, String name, String description, int type) {
-		
+		this.price = price;
+		this.name = name;
+		this.description = description;
+		this.type = type;
 	}
 /**
  * change price of an item
@@ -40,6 +45,10 @@ public class MenuItems {
 		this.name = newName;
 	}
 	
+	public String getName() {
+		return this.name;
+	}
+	
 	public int getType() {
 		return this.type;
 	}
@@ -60,4 +69,20 @@ public class MenuItems {
 		return items;
 	}
 	
+	public static Comparator<MenuItems> sortByPrice=new Comparator<MenuItems>() {
+		@Override
+		public int compare(MenuItems a, MenuItems b) {
+			return a.getPrice() < b.getPrice() ? -1 : a.getPrice() == b.getPrice() ? 0 : 1;
+		}
+	};
+	
+	public static Comparator<MenuItems> sortByName=new Comparator<MenuItems>() {
+		@Override
+		public int compare(MenuItems a, MenuItems b) {
+			return a.name.compareToIgnoreCase(b.name);
+		}
+	};
+	
 }
+
+

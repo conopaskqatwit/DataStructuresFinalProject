@@ -48,7 +48,7 @@ public class Menu {
 	 * sorts bag items by name alphabetically
 	 */
 	public static void sortName(ArrayList<MenuItems> list) {
-		Collections.sort(list, new SortByName());
+		Collections.sort(list, MenuItems.sortByName);
 	} 
 
 }

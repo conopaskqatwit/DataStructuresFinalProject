@@ -1,92 +1,150 @@
 package PackageThing;
 
-import java.sql.Array;
-/**
- * Customer Class
- * @author conopaskq
- *
- */
-public final class Customer {
-	/**
-	 * Data Fields for Customer
-	 */
-	private static double totalPrice;
-	private static String Name;
-	private static ArrayBag<MenuItems> cart = new ArrayBag<MenuItems>();
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
-	private Customer(String name) {
-		Name = name;
+public class CoffeeShop {
+
+	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in);
+		login(input);
+		
 	}
 
-	/**
-	 * return true if able to select item otherwise false
-	 * 
-	 * @param item
-	 * @return
-	 */
-	public static boolean selectItem(MenuItems item) {
-		cart.add(item);
-		return true;
-	}
+	// asssuming this is possible and doesnt delete the queue
+	public static void login(Scanner input) {
+		System.out.println("Welcome to Our CoffeeShip NAME");
+		System.out.println("Enter 1 for Customer,2 for Kitchen, or 3 for Manager");
+		int login = getInt(input);
 
-	/**
-	 * 
-	 * 
-	 * Displays totalPrice and sends items in cart to kitchen/barista queue
-	 * 
-	 * @return boolean
-	 */
-	public static boolean checkOut() {
-		if(!cart.isEmpty()) {
-		MenuItems[] cartArray = (MenuItems[]) new Array[cart.getCurrentSize()];
-		ArrayBag<MenuItems> finalCart = new ArrayBag<MenuItems>() ;
-		cartArray = cart.toArray();
-		int cartsize = cartArray.length;
-		totalPrice = 0;
-		for (int i = 0; i < cartsize; i++) {
-			totalPrice = totalPrice + cartArray[i].getPrice();
-			finalCart.add(cartArray[i]);
+		if (login == 1) {
+			System.out.println("Please enter your name");
+			//input.nextLine();
+			String name = input.nextLine();
+			System.out.println("hello " + name);
+			Customer.setName(name);
+			displayMenu(input);
+			
+
+			// customer side
+		} else if (login == 2) {
+			// Kitchen 
+			// Is going to display the queue of finalcarts
+			//ask kitchen if an order is done and what order it is then removes from the queue and displays the queue again
+		} else if (login == 3) {
+			System.out.println("Please enter the pin: ");
+			int enteredPin = getInt(input);
+			if(Manager.pin != enteredPin) {
+				System.out.println("Pin is incorrect");
+				login(input);
+			} else {
+				System.out.println("Hello Manager, What would you like todo?");
+				
+			}
+			// ask for pin
+			// mangerside
+		} else {
+			System.out.println("Not a valid User number, please try again");
+			login(input);
+
 		}
-		System.out.println("Your subtotal is: " + totalPrice);
-		System.out.printf("MA tax is: %.2f%n", totalPrice * 0.625);
-		System.out.printf("Your total is: %.2f%n", (totalPrice * 0.625 + totalPrice));
-		totalPrice = totalPrice * 0.625 + totalPrice;
-		Kitchen.orders.enqueue(finalCart);
-		return true;
 	}
-		else
-			return false;
+	
+	/**
+	 * get integer from user
+	 * @param Scanner: input
+	 * @return integer
+	 */
+	public static int getInt(Scanner input) {
+		String allnums = "0123456789";
+		String choice;
+		choice = input.nextLine();
+		int number = 0;
+		for(int i = 0; i < choice.length(); i++) {
+			if(!(allnums.indexOf(choice.charAt(i)) >= 0)) {
+				System.out.println("not a valid selection, please try again");
+				number = 0;
+				return getInt(input);
+			} else {
+				number = number + allnums.indexOf(choice.charAt(i)) * (int) Math.pow(10, choice.length() - (i + 1));
+			}
+		}
+		return number;
 	}
+	
+//Manager methods
+	
+	public static void managerOption(Scanner input) {
+		System.out.println("Would you like to add an item(1), remove and item(2), or change the pin(3)");
+		int choice = getInt(input);
+		if (choice == 1) {
+			Manager.addItem(input);
+		} else if (choice == 2) {
+			if (Customer.getCart().isEmpty()) {
+				System.out.println("Cannot checkout empty cart, please make another selection");
+				customerOption(input);
+			} else {
+				Customer.checkOut();
+				login(input);
+			}
+		} else if (choice == 3) {
+			displayMenu(input);
+			
+		} else {
+			System.out.println("Not a valid input, please try again: ");
+			customerOption(input);
+		}
+		return;
+
+	}
+	
+//Customer methods
 
 	/**
-	 * Removes item from cart
-	 * 
-	 * @param item
-	 * @return
+	 * displays the menu for the customer
+	 * @param Scanner: input
 	 */
-	public static MenuItems removeItem(MenuItems item) {
-		cart.remove(item);
-		return item;
+	public static void displayMenu(Scanner input) {
+
+		System.out.println("Would you like to look at Drinks(1) or Food(2)?");
+		int menuchoice = getInt(input);
+		if (menuchoice == 1) {
+			Menu.displayDrinks();
+			customerOption(input);
+		} else if (menuchoice == 2) {
+			Menu.displayFood();
+			customerOption(input);
+		} else {
+			System.out.println("not a valid selction please try again");
+			displayMenu(input);
+
+		}
+		return;
 	}
 
-	/**
-	 * sets name of the bag
-	 * 
-	 * @param name
-	 */
-	public static void setName(String name) {
-		Name = name;
-	}
-public static ArrayBag<MenuItems> getCart(){
-	return cart;
-}
-//Display Bag of menuitems
-	public static String displayCart() {
-		String result = "Bag[ ";
-        for (int index = 0; index < cart.getCurrentSize(); index++) {
-            result += MenuItems.displayMenuItems() + " ";
-        } // end for
-        result += "]";
-        return result;
+	public static void customerOption(Scanner input) {
+		System.out.println("Would you like select an item(1), Checkout(2), or Display another menu(3)?");
+		int choice = getInt(input);
+		if (choice == 1) {
+			// selects item needs menuitme and menu finishd first
+			// going to grab menu item but number, users number will be decrimednt by 1 to
+			// account for index, copy into cart
+		} else if (choice == 2) {
+			boolean checkout = Customer.checkOut();
+			if (!checkout) {
+				System.out.println("Cannot checkout empty cart, please make another selection");
+				customerOption(input);
+			} else {
+				//Customer.checkOut();
+				login(input);
+			}
+		} else if (choice == 3) {
+			displayMenu(input);
+		} else {
+			System.out.println("Not a valid input, please try again: ");
+			customerOption(input);
+		}
+		return;
+
 	}
 }

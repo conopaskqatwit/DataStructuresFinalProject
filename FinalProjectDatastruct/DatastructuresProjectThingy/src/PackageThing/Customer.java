@@ -84,7 +84,7 @@ public static ArrayBag<MenuItems> getCart(){
 	public static String displayCart() {
 		String result = "Bag[ ";
         for (int index = 0; index < cart.getCurrentSize(); index++) {
-            result += MenuItem.displayItem() + " ";
+            result += MenuItems.displayMenuItems() + " ";
         } // end for
         result += "]";
         return result;

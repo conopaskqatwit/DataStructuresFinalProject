@@ -1,23 +1,24 @@
 package PackageThing;
 
+
 import java.util.Collections;
-import java.util.List;
+import java.util.ArrayList;
 
 public class Menu {
 	
-	private ArrayList<String> drinks;
-	private ArrayList<String> food;
+	public static ArrayList<MenuItems> drinks = new ArrayList<MenuItems>();
+	public static ArrayList<MenuItems> food = new ArrayList<MenuItems>();
 	
 	/**
 	 * prints drink bag to console
 	 */
-	public void displayDrinks(ListInterface<String> list) {
+	public static void displayDrinks() {
 		
-		int  numberOfEntries = list.getLength();
+		int  numberOfEntries = drinks.size();
 		System.out.println("The list contains " + numberOfEntries + " entries, as follows:");
 		
-		for(int position = 1; position <= numberOfEntries; position++) {
-			System.out.println(list.getEntry(position) + " is entry " + position);
+		for(int position = 0; position < numberOfEntries; position++) {
+			System.out.println(drinks.get(position).name + " is entry " + (position + 1));
 			
 			System.out.println();
 		} //end for
@@ -25,12 +26,12 @@ public class Menu {
 	/**
 	 * prints food bag to console
 	 */
-	public void displayFood(ListInterface<String> list) {
-		int  numberOfEntries = list.getLength();
+	public static void displayFood() {
+		int  numberOfEntries = food.size();
 		System.out.println("The list contains " + numberOfEntries + " entries, as follows:");
 		
-		for(int position = 1; position <= numberOfEntries; position++) {
-			System.out.println(list.getEntry(position) + " is entry " + position);
+		for(int position = 0; position < numberOfEntries; position++) {
+			System.out.println(food.get(position).name + " is entry " + (position + 1));
 			
 			System.out.println();
 		} //end for
@@ -39,14 +40,15 @@ public class Menu {
 	 * sorts arrayList items by price
 	 */
 	
-	public <T extends Comparable<T>> void sortPrice(ArrayList<T> list) {
-		Collections.sort((List<T>) list);
-	}
+	
+	public static void sortPrice(ArrayList<MenuItems> list) {
+		Collections.sort(list, MenuItems.sortByPrice);
+	} 
 	/**
 	 * sorts bag items by name alphabetically
 	 */
-	public <T extends Comparable<T>> void sortName(ArrayList<T> list) {
-		Collections.sort((List<T>) list);
-	}
+	public static void sortName(ArrayList<MenuItems> list) {
+		Collections.sort(list, new SortByName());
+	} 
 
 }

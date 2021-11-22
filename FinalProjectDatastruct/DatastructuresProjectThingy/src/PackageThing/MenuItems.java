@@ -91,8 +91,8 @@ class PriceComparator implements Comparator<MenuItems> {
 	 */
 	public int compare(MenuItems a, MenuItems b) {
 		return a.getPrice() < b.getPrice() ? -1 : a.getPrice() == b.getPrice() ? 0 : 1;
-	}
-}
+	} //end compare
+} //end PriceComparator
 
 class NameComparator implements Comparator<MenuItems> {
 	@Override
@@ -102,5 +102,5 @@ class NameComparator implements Comparator<MenuItems> {
 	 */
 	public int compare(MenuItems a, MenuItems b) {
 		return a.name.compareToIgnoreCase(b.name);
-	}
-};
+	} //end compare
+} //end NameComparator

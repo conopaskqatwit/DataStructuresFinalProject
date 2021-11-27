@@ -14,26 +14,28 @@ public class Menu {
 	public static void displayDrinks() {
 
 		int numberOfEntries = drinks.size(); //assigns the amount of drinks in the ArrayList to numberOfEntries
-		System.out.println("The list contains " + numberOfEntries + " entries, as follows:");
+		System.out.println("Drink Items: ");
+		System.out.println();
 
 		//Prints the name of the drink and its position in the list of entries to the console 
 		for (int position = 0; position < numberOfEntries; position++) {
-			System.out.println(drinks.get(position).name + " is entry " + (position + 1));
+			System.out.println(" (" + (position + 1) + ") " + drinks.get(position).displayMenuItems());
 
-			System.out.println();
+			//System.out.println();
 		} // end for
 	} // end displayDrinks
 
 	//Prints the ArrayList of food to the console
 	public static void displayFood() {
 		int numberOfEntries = food.size(); //assigns the amount of food in the ArrayList to numberOfEntries
-		System.out.println("The list contains " + numberOfEntries + " entries, as follows:");
+		System.out.println("Food Items: ");
 
+		System.out.println();
 		//Prints the name of the food item and its position in the list of entries to the console
 		for (int position = 0; position < numberOfEntries; position++) {
-			System.out.println(food.get(position).name + " is entry " + (position + 1));
+			System.out.println(" (" + (position + 1) + ") " + food.get(position).displayMenuItems());
 
-			System.out.println();
+			//System.out.println();
 		} // end for
 	} // end displayFood
 

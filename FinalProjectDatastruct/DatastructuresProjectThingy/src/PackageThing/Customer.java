@@ -37,24 +37,23 @@ public final class Customer {
 	 * @return boolean
 	 */
 	public static boolean checkOut() {
-		if(!cart.isEmpty()) {
-		MenuItems[] cartArray = (MenuItems[]) new Array[cart.getCurrentSize()];
-		ArrayBag<MenuItems> finalCart = new ArrayBag<MenuItems>() ;
-		cartArray = cart.toArray();
-		int cartsize = cartArray.length;
-		totalPrice = 0;
-		for (int i = 0; i < cartsize; i++) {
-			totalPrice = totalPrice + cartArray[i].getPrice();
-			finalCart.add(cartArray[i]);
-		}
-		System.out.println("Your subtotal is: " + totalPrice);
-		System.out.printf("MA tax is: %.2f%n", totalPrice * 0.625);
-		System.out.printf("Your total is: %.2f%n", (totalPrice * 0.625 + totalPrice));
-		totalPrice = totalPrice * 0.625 + totalPrice;
-		Kitchen.orders.enqueue(finalCart);
-		return true;
-	}
-		else
+		if (!cart.isEmpty()) {
+			totalPrice = 0;
+			MenuItems temp;
+			ArrayBag<MenuItems> finalCart = new ArrayBag<MenuItems>();
+			while(!cart.isEmpty()) {
+				temp = cart.remove();
+				totalPrice = totalPrice + temp.getPrice();
+				finalCart.add(temp);
+			}
+			
+			System.out.println("Your subtotal is: " + totalPrice);
+			System.out.printf("MA tax is: %.2f%n", totalPrice * 0.625);
+			System.out.printf("Your total is: %.2f%n", (totalPrice * 0.625 + totalPrice));
+			totalPrice = totalPrice * 0.625 + totalPrice;
+			Kitchen.orders.enqueue(finalCart);
+			return true;
+		} else
 			return false;
 	}
 
@@ -81,12 +80,22 @@ public static ArrayBag<MenuItems> getCart(){
 	return cart;
 }
 //Display Bag of menuitems
-	public static String displayCart() {
-		String result = "Bag[ ";
-        for (int index = 0; index < cart.getCurrentSize(); index++) {
-            result += MenuItems.displayMenuItems() + " ";
-        } // end for
-        result += "]";
-        return result;
+	public static void displayCart() {
+		if (cart.isEmpty()) {
+			System.out.println("Cart is Empty");
+		} else {
+			System.out.println("Cart Items");
+			MenuItems item;
+			ArrayBag<MenuItems> temp = new ArrayBag<>();
+			while(!cart.isEmpty()) {
+				temp.add(cart.remove());
+			}
+	        while(!temp.isEmpty()) {
+	        	item = temp.remove();
+	        	System.out.println(item.displayMenuItems());
+	        	cart.add(item);
+	        }
+		}
+        return;
 	}
 }

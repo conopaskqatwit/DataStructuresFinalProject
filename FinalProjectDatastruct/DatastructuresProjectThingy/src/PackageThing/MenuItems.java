@@ -78,7 +78,8 @@ public class MenuItems {
 	 * @return
 	 */
 	public String displayMenuItems() {
-		String items = "Price: " + price + "Name of item: " + name + "Description: " + "Type: " + type;
+		
+		String items = name + "; Price: " + price +  "; Description: " + description;
 		return items;
 	}
 }

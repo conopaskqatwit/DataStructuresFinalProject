@@ -72,6 +72,11 @@ public class CoffeeShop {
 		}
 		return;
 	}
+
+
+	/**
+	 * Finished Methods
+	 */
 	
 	/**
 	 * get integer from user
@@ -168,7 +173,7 @@ public class CoffeeShop {
 		}
 
 		public static void customerOption(Scanner input, int menuType) {
-			System.out.println("Would you like select an item(1), Checkout(2), Display another menu(3), view cart(4), or cancel order(5)?");
+			System.out.println("Would you like select an item(1), Checkout(2), Display another menu(3), view cart(4), or cancel order(5), sort items by price(6), or sort items by name(7)?");
 			int choice = getInt(input);
 			if (choice == 1) {
 				System.out.println("Which item would you like to select?");
@@ -211,6 +216,19 @@ public class CoffeeShop {
 				Customer.getCart().clear();
 				System.out.println("Logging out...");
 				login(input);
+			} else if (choice == 6) {
+				//Assertion: menuType equals 1 or 2
+				if (menuType == 1) {
+					Menu.sortName(Menu.drinks);
+					Menu.displayDrinks();
+					customerOption(input, menuType);
+				} else {
+					Menu.sortName(Menu.food);
+					Menu.displayFood();
+					customerOption(input, menuType);
+				}
+			} else if (choice == 7) {
+				
 			} else {
 				System.out.println("Not a valid input, please try again: ");
 				customerOption(input, menuType);

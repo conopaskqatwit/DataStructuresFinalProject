@@ -82,6 +82,13 @@ public class ArrayList<T> implements ListInterface<T> {
 		}
 	} // end remove
 	
+	public boolean remove(T anEntry) {
+        checkIntegrity();
+        int index = getIndex(anEntry);
+        T result = remove(index);
+        return anEntry.equals(result);
+    } // end remove
+	
 	/*
 	 * Returns index of given entry, returns -1 if not found
 	 */

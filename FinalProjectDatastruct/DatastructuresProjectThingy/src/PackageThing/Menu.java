@@ -10,13 +10,13 @@ public class Menu {
 	//Prints the ArrayList of drinks to the console
 	public static void displayDrinks() {
 
-		int numberOfEntries = drinks.size(); //assigns the amount of drinks in the ArrayList to numberOfEntries
+		int numberOfEntries = drinks.getLength(); //assigns the amount of drinks in the ArrayList to numberOfEntries
 		System.out.println("Drink Items: ");
 		System.out.println();
 
 		//Prints the name of the drink and its position in the list of entries to the console 
-		for (int position = 0; position < numberOfEntries; position++) {
-			System.out.println(" (" + (position + 1) + ") " + drinks.get(position).displayMenuItems());
+		for (int position = 1; position <= numberOfEntries; position++) {
+			System.out.println(" (" + (position) + ") " + drinks.getEntry(position).displayMenuItems());
 
 			//System.out.println();
 		} // end for
@@ -24,13 +24,13 @@ public class Menu {
 
 	//Prints the ArrayList of food to the console
 	public static void displayFood() {
-		int numberOfEntries = food.size(); //assigns the amount of food in the ArrayList to numberOfEntries
+		int numberOfEntries = food.getLength(); //assigns the amount of food in the ArrayList to numberOfEntries
 		System.out.println("Food Items: ");
 
 		System.out.println();
 		//Prints the name of the food item and its position in the list of entries to the console
-		for (int position = 0; position < numberOfEntries; position++) {
-			System.out.println(" (" + (position + 1) + ") " + food.get(position).displayMenuItems());
+		for (int position = 1; position <= numberOfEntries; position++) {
+			System.out.println(" (" + (position) + ") " + food.getEntry(position).displayMenuItems());
 
 			//System.out.println();
 		} // end for

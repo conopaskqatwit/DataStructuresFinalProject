@@ -82,26 +82,17 @@ public class MenuItems {
 		String items = name + "; Price: " + price +  "; Description: " + description;
 		return items;
 	}
+	
+	//Compares the price of MenuItems a and MenuItems b
+	public double comparePrice(MenuItems other) {
+		return this.getPrice() - other.getPrice();
+	} //end comparePrice
+	
+	//Compares the name of MenuItems a and MenuItems b
+	public int compareName(MenuItems other) {
+		return this.getName().compareTo(other.getName()); 
+	} //end compareName
+	
 }
 
-class PriceComparator implements Comparator<MenuItems> {
-	@Override
-	/*compares two items of type MenuItems and 
-	 * returns a negative integer, zero, or a positive 
-	 * integer as the first argument is less than, equal to, or greater than the second.
-	 */
-	public int compare(MenuItems a, MenuItems b) {
-		return a.getPrice() < b.getPrice() ? -1 : a.getPrice() == b.getPrice() ? 0 : 1;
-	} //end compare
-} //end PriceComparator
 
-class NameComparator implements Comparator<MenuItems> {
-	@Override
-	/*compares two items of type MenuItems and 
-	 * returns a negative integer, zero, or a positive 
-	 * integer as the first argument is less than, equal to, or greater than the second.
-	 */
-	public int compare(MenuItems a, MenuItems b) {
-		return a.name.compareToIgnoreCase(b.name);
-	} //end compare
-} //end NameComparator

@@ -1,8 +1,5 @@
 package PackageThing;
 
-import java.util.Collections;
-import java.util.ArrayList;
-
 public class Menu {
 
 	//Creates an ArrayList of the type MenuItems
@@ -38,19 +35,56 @@ public class Menu {
 			//System.out.println();
 		} // end for
 	} // end displayFood
+	
+	// Sorts the ArrayList of MenuItems in ascending numerical order
+	public static <T extends Comparable<? super T>> void sortPrice(ArrayList<MenuItems> list) {
+		for(int index = 1; index < list.getLength(); index++) {
+			int indexOfNextSmallest = getIndexOfSmallestPrice(list, index, list.getLength());
+			swap(list, index, indexOfNextSmallest);
+		} //end for
+	} //end sortPrice
+	
+	//Finds the index of the smallest value in a portion of an ArrayList and returns the index of the smallest value
+	public static <T extends Comparable<? super T>> int getIndexOfSmallestPrice(ArrayList<MenuItems> list, int first, int last){
+		MenuItems min = list.getEntry(first);
+		int indexOfMin = first;
+		for (int index = first + 1; index <= last; index++) {
+			if((list.getEntry(index).comparePrice(min)) < 0) {
+				min = list.getEntry(index);
+				indexOfMin = index;
+			} //end if
+		} //end for 
+		return indexOfMin;
+	} //end getIndexOfSmallestPrice
+
+	// Sorts the ArrayList of MenuItems in alphabetical order
+	public static <T extends Comparable<? super T>> void sortName(ArrayList<MenuItems> list) {
+		for(int index = 1; index < list.getLength(); index++) {
+			int indexOfNextSmallest = getIndexOfSmallestName(list, index, list.getLength());
+			swap(list, index, indexOfNextSmallest);
+		} // end for	
+	} // end sortName
+	
+	//Finds the index of the smallest value in a portion of an ArrayList and returns the index of the smallest value
+	public static <T extends Comparable<? super T>> int getIndexOfSmallestName(ArrayList<MenuItems> list, int first, int last){
+		MenuItems min = list.getEntry(first);
+		int indexOfMin = first;
+		for (int index = first + 1; index <= last; index++) {
+			if((list.getEntry(index).compareName(min)) < 0) {
+				min = list.getEntry(index);
+				indexOfMin = index;
+			} //end if 
+		} //end for
+		return indexOfMin;
+	} //end getIndexOfSmallestName 
+
+	//swaps the ArrayList entries 
+	public static void swap(ArrayList<MenuItems> list, int i, int j) {
+		MenuItems tmp = list.getEntry(i);
+		list.set(i, list.getEntry(j));
+		list.set(j, tmp);
+	} //end swap
 
 	
-
-	//Sorts the ArrayList of MenuItems in ascending numerical order
-	public static void sortPrice(ArrayList<MenuItems> list) {
-		//invokes the sort method of the Java Class Collections, taking an ArrayList and a user defined comparator as parameters
-		Collections.sort(list, new PriceComparator()); //PriceComparator is located in the MenuItems class
-	} //end sortPrice
-
-	//Sorts the ArrayList of MenuItems in alphabetical order
-	public static void sortName(ArrayList<MenuItems> list) {
-		//invokes the sort method of the Java Class Collections, taking an ArrayList and a user defined comparator as parameters
-		Collections.sort(list, new NameComparator()); //NameComparator is located in the MenuItems class
-	} //end sortName
 
 } //end Menu

@@ -38,6 +38,7 @@ public class CoffeeShop {
 				login(input);
 			} else {
 				managerOption(input);
+				System.out.println("Logged In");
 				
 			}
 		} else if (login == 4) {
@@ -103,7 +104,6 @@ public class CoffeeShop {
 	//Manager methods
 	
 		public static void managerOption(Scanner input) {
-			input.nextLine();
 			System.out.println("Would you like to add an item(1), remove and item(2), change the pin(3), or logout(4)");
 			int choice = getInt(input);
 			if (choice == 1) {
@@ -180,19 +180,19 @@ public class CoffeeShop {
 				int item = getInt(input);
 				//Assertion: menuType equals 1 or 2
 				if (menuType == 1) {
-					while(item <= 0 || item > Menu.drinks.size()) {
+					while(item <= 0 || item > Menu.drinks.getLength()) {
 						System.out.println("There is no item with that number.  Which item would you like to select?");
 						item = CoffeeShop.getInt(input);
 					}
-					Customer.selectItem(Menu.drinks.get(item - 1));
+					Customer.selectItem(Menu.drinks.getEntry(item - 1));
 					Customer.displayCart();
 					customerOption(input, menuType);
 				} else {
-					while(item <= 0 || item > Menu.food.size()) {
+					while(item <= 0 || item > Menu.food.getLength()) {
 						System.out.println("There is no item with that number.  Which item would you like to select?");
 						item = CoffeeShop.getInt(input);
 					}
-					Customer.selectItem(Menu.food.get(item - 1));
+					Customer.selectItem(Menu.food.getEntry(item - 1));
 					Customer.displayCart();
 					customerOption(input, menuType);
 				}

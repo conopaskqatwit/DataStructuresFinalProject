@@ -87,7 +87,7 @@ public final class Manager {
 			Menu.displayDrinks();
 			System.out.println("Which item number would you like to remove?");
 			type = CoffeeShop.getInt(input);
-			while(type <= 0 || type > Menu.drinks.size()) {
+			while(type <= 0 || type > Menu.drinks.length()) {
 				System.out.println("There is no item with that number");
 				type = CoffeeShop.getInt(input);
 			}
@@ -101,7 +101,7 @@ public final class Manager {
 			Menu.displayFood();
 			System.out.println("Which item number would you like to remove?");
 			type = CoffeeShop.getInt(input);
-			while(type <= 0 || type > Menu.drinks.size()) {
+			while(type <= 0 || type > Menu.drinks.length()) {
 				System.out.println("There is no item with that number");
 				type = CoffeeShop.getInt(input);
 			}
